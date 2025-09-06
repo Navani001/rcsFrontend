@@ -12,7 +12,28 @@ const axiosClient = axios.create({
 });
 
 //  **Request Interceptor**
-
+axiosClient.interceptors.request.use(
+    async (config: InternalAxiosRequestConfig) => {
+        // Try to get auth session on client side
+        if (typeof window !== 'undefined') {
+            try {
+                const { getSession } = await import("next-auth/react");
+                const session = await getSession();
+                if (session && (session.user as any)?.token) {
+                    config.headers.Authorization = `Bearer ${(session.user as any).token}`;
+                }
+            } catch (error) {
+                console.log("Could not get session for request interceptor:", error);
+            }
+        }
+        console.log("Request Config:", config);
+        return config;
+    },
+    (error) => {
+        console.error("Request Error:", error);
+        return Promise.reject(error);
+    }
+);
 
 //  **Response Interceptor**
 axiosClient.interceptors.response.use(
