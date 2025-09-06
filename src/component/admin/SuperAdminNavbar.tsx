@@ -54,18 +54,18 @@ const superAdminNavigationItems = [
     icon: MdAnalytics,
     description: "Revenue & usage insights"
   },
-  {
-    name: "Message Gateway",
-    href: "/admin/gateway",
-    icon: MdMessage,
-    description: "RCS API management"
-  },
-  {
-    name: "System Health",
-    href: "/admin/system",
-    icon: MdMonitor,
-    description: "Uptime & performance"
-  },
+  // {
+  //   name: "Message Gateway",
+  //   href: "/admin/gateway",
+  //   icon: MdMessage,
+  //   description: "RCS API management"
+  // },
+  // {
+  //   name: "System Health",
+  //   href: "/admin/system",
+  //   icon: MdMonitor,
+  //   description: "Uptime & performance"
+  // },
   {
     name: "Admin Roles",
     href: "/admin/roles",
@@ -81,24 +81,19 @@ const quickActions = [
     icon: MdVerifiedUser,
     color: "text-green-600"
   },
-  {
-    name: "System Alerts",
-    href: "/admin/alerts",
-    icon: MdError,
-    color: "text-red-600"
-  },
+  // {
+  //   name: "System Alerts",
+  //   href: "/admin/alerts",
+  //   icon: MdError,
+  //   color: "text-red-600"
+  // },
   {
     name: "Revenue Report",
     href: "/admin/reports",
     icon: MdTrendingUp,
     color: "text-blue-600"
   },
-  {
-    name: "API Status",
-    href: "/admin/api-status",
-    icon: MdApi,
-    color: "text-purple-600"
-  }
+  //  
 ];
 
 export const SuperAdminNavbar = () => {
