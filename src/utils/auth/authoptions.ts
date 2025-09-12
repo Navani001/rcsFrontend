@@ -10,6 +10,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { JWT } from "next-auth/jwt";
 import { postRequest } from "../axios/axios";
+import { redirect } from "next/dist/client/components/navigation";
 const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [ GoogleProvider({
@@ -65,7 +66,7 @@ const authOptions = {
       }
       console.log(data)
       console.log(user)
-
+// await redirect("/hi")
       return true;
     } catch (error) {
       console.error("Error during Google sign in:", error);
@@ -75,6 +76,9 @@ const authOptions = {
   // console.log("user", user);
   return true;
 },
+async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
   async jwt({ token, user }:any) {
   if (user) {
     console.log("User in JWT callback:", user);

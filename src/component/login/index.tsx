@@ -24,15 +24,17 @@ export const Login = () => {
       password,
       redirect: false, // Prevent automatic redirect
     }).then((response) => {
+      console.log("response from login",response)
       if (response?.error) {
         console.error("Login failed:", response.error);
         setIsLoading(false);
       } else {
         // Handle successful login, e.g., redirect to dashboard
-        window.location.href = "/dashboard"; // Adjust the redirect path as needed
+        console.log("hacker",response);   
+        // window.location.href = "/dashboard"; // Adjust the redirect path as needed
       }
     });
-    setTimeout(() => setIsLoading(false), 2000); // Simulate loading
+    
   };
 
   return (
@@ -118,7 +120,10 @@ export const Login = () => {
         {/* Google Sign In */}
         <ButtonComponent
           buttonIcon={<FcGoogle size={20} />}
-          handleOnClick={() => signIn("google", { redirectTo: "/" })}
+          handleOnClick={() => signIn("google",
+            //  { redirectTo: "/" }     
+            ).then((response) => {console.log("response from google sign in",response)})
+          }
           buttonText="Continue with Google"
           baseClassName="w-full border-2 border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold py-3 rounded-xl transition-colors"
           textClassName="text-slate-700"

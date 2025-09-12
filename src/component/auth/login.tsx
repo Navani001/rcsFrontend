@@ -28,7 +28,7 @@ export function SignIn() {
     };
 
     return (
-        <div className="mx-auto  w-[200px]  h-full bg-red-900  bg-primary-foreground">
+        <div className="mx-auto  w-[200px]  h-full bg-primary-foreground">
             <div>
                 <p className="text-xl w-full flex justify-center mt-3 mb-5">Sign In</p>
                 <form onSubmit={handleSubmit}>

@@ -34,6 +34,7 @@ import {
   MdDownload
 } from "react-icons/md";
 import { adminAPI } from '../../utils/adminAPI';
+import { BrandAPI, Brand } from '../../utils/brandAPI';
 
 // Types
 interface AdminUser {
@@ -106,10 +107,13 @@ export const AdminRoles = () => {
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [roles, setRoles] = useState<Role[]>([]);
   const [permissions, setPermissions] = useState<PermissionGroup[]>([]);
+  const [brands, setBrands] = useState<any>([]);
+  const [brandsLoading, setBrandsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     role: "",
+    brandId: "",
     permissions: [] as string[]
   });
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -159,6 +163,23 @@ export const AdminRoles = () => {
       }
     } catch (error) {
       console.error('Failed to fetch permissions:', error);
+    }
+  };
+
+  const fetchBrands = async () => {
+    try {
+      setBrandsLoading(true);
+      const response:any = await BrandAPI.getAllBrands({ 
+        status: 'active',
+        limit: 100 // Get up to 100 active brands
+      });
+      if (response.success) {
+        setBrands(response.data.brands || []);
+      }
+    } catch (error) {
+      console.error('Failed to fetch brands:', error);
+    } finally {
+      setBrandsLoading(false);
     }
   };
 
@@ -236,6 +257,7 @@ export const AdminRoles = () => {
     fetchAdminStats();
     fetchRoles();
     fetchPermissions();
+    fetchBrands();
   }, []);
 
   // Filter users based on search and filters
@@ -270,6 +292,7 @@ export const AdminRoles = () => {
       name: "",
       email: "",
       role: "",
+      brandId: "",
       permissions: []
     });
     onOpen();
@@ -282,6 +305,7 @@ export const AdminRoles = () => {
       name: user.name,
       email: user.email,
       role: user.role,
+      brandId: user.brand?.id.toString() || "",
       permissions: []
     });
     onOpen();
@@ -302,7 +326,8 @@ export const AdminRoles = () => {
     const userData = {
       name: formData.name,
       email: formData.email,
-      role: formData.role
+      role: formData.role,
+      brandId: formData.brandId ? parseInt(formData.brandId) : undefined
     };
 
     let success = false;
@@ -354,8 +379,9 @@ export const AdminRoles = () => {
             onPress={() => {
               fetchAdminUsers();
               fetchAdminStats();
+              fetchBrands();
             }}
-            isLoading={loading}
+            isLoading={loading || brandsLoading}
             className="bg-gray-100 text-gray-700"
           >
             Refresh
@@ -364,7 +390,7 @@ export const AdminRoles = () => {
             variant="flat"
             size="sm"
             startContent={<MdDownload />}
-            className="bg-blue-100 text-blue-700"
+              className="bg-blue-100 text-blue-700"
           >
             Export Access Report
           </Button>
@@ -638,14 +664,30 @@ export const AdminRoles = () => {
                         </SelectItem>
                       ))}
                     </Select>
-                    <div className="flex flex-col gap-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Brand Association
-                      </label>
-                      <span className="text-sm text-gray-500">
-                        Auto-assigned based on system requirements
-                      </span>
-                    </div>
+                    
+                    <Select
+                      label="Brand Association"
+                      placeholder="Select a brand (optional)"
+                      selectedKeys={formData.brandId ? [formData.brandId] : []}
+                      onSelectionChange={(keys) => {
+                        const selectedBrandId = Array.from(keys)[0] as string;
+                        setFormData(prev => ({ ...prev, brandId: selectedBrandId || "" }));
+                      }}
+                      isLoading={brandsLoading}
+                      description="Assign admin to a specific brand"
+                    >
+                      <SelectItem key="">
+                        No Brand Assignment
+                      </SelectItem>
+                      {brands.map((brand: Brand) => (
+                        <SelectItem 
+                          key={brand.id.toString()} 
+                          description={brand.description || `${brand._count?.campaigns || 0} campaigns, ${brand._count?.brandAgents || 0} agents`}
+                        >
+                          {brand.display_name || brand.name}
+                        </SelectItem>
+                      ))}
+                    </Select>
                   </div>
 
                   {/* Permissions */}

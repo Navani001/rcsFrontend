@@ -30,6 +30,12 @@ const superAdminNavigationItems = [
     icon: MdDashboard,
     description: "Platform overview & metrics"
   },
+  // {
+  //   name: "Brand Approval",
+  //   href: "/admin/brands",
+  //   icon: MdVerifiedUser,
+  //   description: "Review & approve brands"
+  // },
   {
     name: "Customer Management",
     href: "/admin/customers",
@@ -77,7 +83,7 @@ const superAdminNavigationItems = [
 const quickActions = [
   {
     name: "Approve Brand",
-    href: "/admin/approvals",
+    href: "/admin/brands",
     icon: MdVerifiedUser,
     color: "text-green-600"
   },
