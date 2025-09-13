@@ -41,7 +41,7 @@ export const SuperAdminHeader = ({ user }: SuperAdminHeaderProps) => {
   }, [showUserMenu]);
   
   return (
-    <header className="bg-gradient-to-r from-red-600 to-red-700 shadow-lg fixed top-0 left-0 right-0 z-50">
+    <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg fixed top-0 left-0 right-0 z-50">
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Left side - Super Admin Brand */}
@@ -54,7 +54,7 @@ export const SuperAdminHeader = ({ user }: SuperAdminHeaderProps) => {
                 <h1 className="text-xl font-bold text-white">
                   Super Admin Panel
                 </h1>
-                <p className="text-sm text-red-100">
+                <p className="text-sm text-blue-100">
                   RCS Platform Management
                 </p>
               </div>
@@ -100,7 +100,7 @@ export const SuperAdminHeader = ({ user }: SuperAdminHeaderProps) => {
                   <p className="text-sm font-medium text-white">
                     {user?.name || "Super Admin"}
                   </p>
-                  <p className="text-xs text-red-100 opacity-80">
+                  <p className="text-xs text-blue-100 opacity-80">
                     {user?.role || "Platform Administrator"}
                   </p>
                 </div>
@@ -124,9 +124,11 @@ export const SuperAdminHeader = ({ user }: SuperAdminHeaderProps) => {
                     </p>
                     <p className="text-xs text-gray-500">{user?.email}</p>
                     <div className="mt-1">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                          <div>
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         Super Administrator
                       </span>
+                    </div>
                     </div>
                   </div>
                   <div className="px-2 py-1">

@@ -131,7 +131,7 @@ export const PlatformAnalytics = () => {
             size="sm"
             startContent={<MdRefresh />}
             onClick={handleRefresh}
-            className="bg-green-100 text-green-700"
+            className="bg-blue-50 text-blue-600"
           >
             Refresh
           </Button>

@@ -136,16 +136,16 @@ export const SuperAdminNavbar = () => {
                   group flex flex-col gap-1 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200
                   ${
                     isActive
-                      ? "bg-red-50 text-red-700 border-r-2 border-red-600 shadow-sm"
+                      ? "bg-blue-50 text-blue-700 border-r-2 border-blue-600 shadow-sm"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }
                 `}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`text-lg ${isActive ? "text-red-600" : "text-gray-400 group-hover:text-gray-600"}`} />
+                  <Icon className={`text-lg ${isActive ? "text-blue-600" : "text-gray-400 group-hover:text-gray-600"}`} />
                   {item.name}
                 </div>
-                <div className={`text-xs ml-6 ${isActive ? "text-red-600" : "text-gray-500"}`}>
+                <div className={`text-xs ml-6 ${isActive ? "text-blue-600" : "text-gray-500"}`}>
                   {item.description}
                 </div>
               </Link>

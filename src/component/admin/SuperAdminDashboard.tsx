@@ -88,7 +88,7 @@ export const SuperAdminDashboard = () => {
             startContent={<MdRefresh />}
             onClick={refreshData}
             isLoading={isLoading}
-            className="bg-red-100 text-red-700"
+            className="bg-blue-100 text-blue-700"
           >
             Refresh
           </Button>
@@ -97,12 +97,12 @@ export const SuperAdminDashboard = () => {
 
       {/* Critical Alerts Banner */}
       {stats.criticalAlerts > 0 && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
           <div className="flex items-center">
-            <MdError className="text-red-500 text-xl mr-3" />
+            <MdError className="text-blue-500 text-xl mr-3" />
             <div>
-              <h3 className="text-red-800 font-medium">Critical System Alert</h3>
-              <p className="text-red-700 text-sm">
+              <h3 className="text-blue-800 font-medium">Critical System Alert</h3>
+              <p className="text-blue-700 text-sm">
                 {stats.criticalAlerts} critical issue(s) require immediate attention
               </p>
             </div>
@@ -245,13 +245,13 @@ export const SuperAdminDashboard = () => {
               {mockRecentActivities.map((activity) => (
                 <div key={activity.id} className="flex items-start gap-3 p-2 hover:bg-gray-50 rounded-lg">
                   <div className={`p-1 rounded-full ${
-                    activity.priority === 'critical' ? 'bg-red-100' :
+                    activity.priority === 'critical' ? 'bg-blue-100' :
                     activity.priority === 'high' ? 'bg-orange-100' :
                     activity.priority === 'medium' ? 'bg-yellow-100' :
                     'bg-blue-100'
                   }`}>
                     {activity.type === 'approval' && <MdCheckCircle className="text-green-600 text-sm" />}
-                    {activity.type === 'payment' && <MdAttachMoney className="text-red-600 text-sm" />}
+                    {activity.type === 'payment' && <MdAttachMoney className="text-blue-600 text-sm" />}
                     {activity.type === 'campaign' && <MdCampaign className="text-blue-600 text-sm" />}
                     {activity.type === 'system' && <MdWarning className="text-orange-600 text-sm" />}
                   </div>
@@ -369,13 +369,13 @@ export const SuperAdminDashboard = () => {
 
         <Card className="cursor-pointer hover:shadow-lg transition-shadow">
           <CardBody className="text-center p-6">
-            <MdSecurity className="text-3xl text-red-600 mx-auto mb-3" />
+            <MdSecurity className="text-3xl text-blue-600 mx-auto mb-3" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">System Monitor</h3>
             <p className="text-sm text-gray-600 mb-4">
               Monitor system health, performance, and security alerts
             </p>
             <Link href="/admin/system">
-              <Button color="danger" className="w-full">
+              <Button color="primary" className="w-full">
                 View System Status
               </Button>
             </Link>
